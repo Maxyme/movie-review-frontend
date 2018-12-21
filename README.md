@@ -1,3 +1,15 @@
+# Movie-review-frontend
+
+## Starting the development server
+
+`npm start`
+
+## Deploying on heroku
+
+- setting environment variables on heroky, with heroku toolbelt cli:  
+
+`heroku config:set REACT_APP_API_URL=https://movie-review-staging.herokuapp.com/ --remote staging`  
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

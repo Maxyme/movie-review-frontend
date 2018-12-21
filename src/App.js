@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 
+import axios from 'axios';
+
 import './App.css';
-
-const API = 'http://127.0.0.1:5000';
-
 
 class App extends Component {
     constructor(props) {
@@ -15,33 +14,19 @@ class App extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    
     handleInputChange(event) {
         this.setState({url: event.target.value});
     }
 
     handleSubmit(event) {
         event.preventDefault(); // prevent refresh after form send
-
-        fetch(API + '/getcounts', {
-            method: 'post',
-            mode: "cors", // no-cors, cors, *same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "omit", // include, *same-origin, omit
-            redirect: 'follow',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-                body: JSON.stringify({"url": this.state.url})
-            })
-            .then(response => response.json())
-            .then(data => this.setState({counts: data}),
-            );
+        axios.post(process.env.REACT_APP_API_URL + '/getcounts', {"url": this.state.url})
+        .then((response) => this.setState({counts: response.data}))
     }
 
     render() {
-
+        console.log(process.env.REACT_APP_API_URL)
         const counts = this.state.counts
         const listItems = counts.map((key) =>
         <li key={key.name}>
