@@ -225,7 +225,7 @@ class App extends Component {
                 this.img = node;
               }}
             >
-              <AnnotationImage />
+              <AnnotationImage width={994} height={640}/>
             </Layer>
           </Stage>
         </div>
