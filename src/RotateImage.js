@@ -29,7 +29,7 @@ class RotateImage extends React.Component {
                     transform: `rotate(${this.state.rotation}deg)`
                 }}
                     src={this.props.src}
-                    width="400"
+                    width={this.props.width}
                     alt=""/>
                 <input onClick={this.rotate} type="button" value="right"/>
             </div>

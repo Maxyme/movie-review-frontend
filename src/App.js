@@ -3,11 +3,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import RotateImage from "./RotateImage";
 
-import { Stage, Layer } from "react-konva";
+import { Stage, Layer, Text } from "react-konva";
 import shortid from "shortid";
 import Rectangle from "./Rectangle";
 import TransformerComponent from "./TransformerComponent";
 import AnnotationImage from "./AnnotationImage";
+
+import { Image } from "react-konva";
 
 import "./App.css";
 
@@ -19,6 +21,9 @@ class App extends Component {
       counts: [],
       file: "",
       imagePreviewUrl: "",
+      imageHeight: 800,
+      imageWidth: 1000,
+      imageSrc: "https://s3-ap-northeast-1.amazonaws.com/uploads-jp.hipchat.com/119782/5591318/0GFMfb0v0xHieft/upload.png",
       rectangles: [],
       rectCount: 0,
       selectedShapeName: "",
@@ -133,7 +138,21 @@ class App extends Component {
     let file = event.target.files[0];
 
     reader.onloadend = () => {
-      this.setState({ file: file, imagePreviewUrl: reader.result });
+      //let img = new Image();
+      // var img = new Image({
+      //   x: 200,
+      //   y: 50,
+      //   image: reader.result,
+      //   width: 100,
+      //   height: 100
+      // })
+      // img.onload = function() {
+      //   console.log("The width of the image is " + img.width + "px.");
+      // };
+      // img.src = reader.result;
+
+      //const image = new window.Image();
+      this.setState({ file: file, imagePreviewUrl: reader.result});
     };
 
     reader.readAsDataURL(file);
@@ -183,7 +202,7 @@ class App extends Component {
           />{" "}
           {this.state.imagePreviewUrl ? (
             <div className="imgPreview">
-              <RotateImage src={this.state.imagePreviewUrl} />
+              <RotateImage src={this.state.imagePreviewUrl} width="400"/>
             </div>
           ) : (
             <div className="previewText" />
@@ -195,8 +214,8 @@ class App extends Component {
               this.stage = node;
             }}
             container="app"
-            width={994}
-            height={640}
+            width={this.state.imageWidth}
+            height={this.state.imageHeight}
             onMouseDown={this.handleStageMouseDown}
             onTouchStart={this.handleStageMouseDown}
             onMouseMove={this.state.mouseDown && this.handleNewRectChange}
@@ -205,6 +224,7 @@ class App extends Component {
             onTouchEnd={this.handleStageMouseUp}
           >
             <Layer>
+              {/* <Text text="Try to drag a star" /> */}
               {this.state.rectangles.map((rect, i) => (
                 <Rectangle
                   sclassName="rect"
@@ -225,7 +245,7 @@ class App extends Component {
                 this.img = node;
               }}
             >
-              <AnnotationImage width={994} height={640}/>
+              <AnnotationImage src={this.state.imageSrc} width={this.state.imageWidth} height={this.state.imageHeight}/>
             </Layer>
           </Stage>
         </div>

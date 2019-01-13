@@ -1,22 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
 // import {TypographyStyle, GoogleFont} from 'react-typography'
 // import typography from './typography'
 
 ReactDOM.render(
-    <html>
+  <html>
     <head>
-        {/* <TypographyStyle typography={typography}/>
+      {/* <TypographyStyle typography={typography}/>
         <GoogleFont typography={typography}/> */}
     </head>
     <body>
-        <App/>,
+      <App />,
     </body>
-</html>, document.getElementById('root'));
+  </html>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls. Learn

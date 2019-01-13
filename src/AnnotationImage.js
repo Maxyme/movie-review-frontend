@@ -11,9 +11,7 @@ class AnnotationImage extends React.Component {
 
   componentDidMount() {
     const image = new window.Image();
-    //image.src = this.props.image;
-    image.src =
-      "https://s3-ap-northeast-1.amazonaws.com/uploads-jp.hipchat.com/119782/5591318/0GFMfb0v0xHieft/upload.png";
+    image.src = this.props.src;
     image.onload = () => {
       this.setState({
         image: image
