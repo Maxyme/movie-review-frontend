@@ -41,6 +41,7 @@ class App extends Component {
     this.handleStageMouseUp = this.handleStageMouseUp.bind(this);
   }
 
+  // This is needed for the annotation layer
   componentDidMount() {
     this.img.moveToBottom();
   }
@@ -138,21 +139,14 @@ class App extends Component {
     let file = event.target.files[0];
 
     reader.onloadend = () => {
-      //let img = new Image();
-      // var img = new Image({
-      //   x: 200,
-      //   y: 50,
-      //   image: reader.result,
-      //   width: 100,
-      //   height: 100
-      // })
-      // img.onload = function() {
-      //   console.log("The width of the image is " + img.width + "px.");
-      // };
-      // img.src = reader.result;
 
-      //const image = new window.Image();
-      this.setState({ file: file, imagePreviewUrl: reader.result});
+      const img = new window.Image();
+      img.onload = () => {
+
+        this.setState({ imageHeight: img.height, imageWidth: img.width, file: file, imagePreviewUrl: reader.result, rectangles: []});
+      };
+      img.src = reader.result;
+      // this.setState({ file: file, imagePreviewUrl: reader.result});
     };
 
     reader.readAsDataURL(file);
@@ -199,14 +193,14 @@ class App extends Component {
             className="fileInput"
             type="file"
             onChange={this.handleImageChange}
-          />{" "}
-          {this.state.imagePreviewUrl ? (
+          />
+          {/* {this.state.imagePreviewUrl ? (
             <div className="imgPreview">
-              <RotateImage src={this.state.imagePreviewUrl} width="400"/>
+              <RotateImage src={this.state.imagePreviewUrl} width="100"/>
             </div>
           ) : (
             <div className="previewText" />
-          )}
+          )} */}
         </div>
         <div id="app">
           <Stage
@@ -224,7 +218,6 @@ class App extends Component {
             onTouchEnd={this.handleStageMouseUp}
           >
             <Layer>
-              {/* <Text text="Try to drag a star" /> */}
               {this.state.rectangles.map((rect, i) => (
                 <Rectangle
                   sclassName="rect"
@@ -245,7 +238,7 @@ class App extends Component {
                 this.img = node;
               }}
             >
-              <AnnotationImage src={this.state.imageSrc} width={this.state.imageWidth} height={this.state.imageHeight}/>
+              <AnnotationImage src={this.state.imagePreviewUrl} width={this.state.imageWidth} height={this.state.imageHeight}/>
             </Layer>
           </Stage>
         </div>

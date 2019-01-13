@@ -5,11 +5,19 @@ class AnnotationImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null,
+      image: null
     };
   }
 
   componentDidMount() {
+    this.updateImage();
+  }
+
+  componentDidUpdate() {
+    this.updateImage();
+  }
+
+  updateImage() {
     const image = new window.Image();
     image.src = this.props.src;
     image.onload = () => {
@@ -20,7 +28,13 @@ class AnnotationImage extends React.Component {
   }
 
   render() {
-    return <Image height={this.props.height} width={this.props.width} image={this.state.image} />;
+    return (
+      <Image
+        height={this.props.height}
+        width={this.props.width}
+        image={this.state.image}
+      />
+    );
   }
 }
 
