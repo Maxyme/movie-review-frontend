@@ -11,7 +11,7 @@ ReactDOM.render(
     <html>
     <head>
         <TypographyStyle typography={typography}/>
-        <GoogleFont typography={typography}/>
+
     </head>
     <body>
         <App/>,

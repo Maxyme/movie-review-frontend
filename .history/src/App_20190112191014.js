@@ -15,7 +15,6 @@ class App extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleImageChange = this.handleImageChange.bind(this);
     }
 
     handleInputChange(event) {

@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import {TypographyStyle, GoogleFont} from 'react-typography'
+// Best practice is to have a typography module where you define your theme.
 import typography from './typography'
 
 ReactDOM.render(

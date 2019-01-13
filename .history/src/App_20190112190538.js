@@ -13,9 +13,12 @@ class App extends Component {
             file: '',
             imagePreviewUrl: ''
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleImageChange = this.handleImageChange.bind(this);
+        this.handleInputChange = this
+            .handleInputChange
+            .bind(this);
+        this.handleSubmit = this
+            .handleSubmit
+            .bind(this);
     }
 
     handleInputChange(event) {
@@ -79,11 +82,11 @@ class App extends Component {
                         </div>
                     )}
 
-                <div className="previewImage">
+                <div className="previewComponent">
                     <input
                         className="fileInput"
                         type="file"
-                        onChange={this.handleImageChange}/> {imagePreviewUrl
+                        onChange={(e) => this.handleImageChange(e)}/> {imagePreviewUrl
                         ? (
                             <div className="imgPreview">
                                 <RotateImage src={imagePreviewUrl}/>

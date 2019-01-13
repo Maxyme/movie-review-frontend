@@ -15,7 +15,6 @@ class App extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleImageChange = this.handleImageChange.bind(this);
     }
 
     handleInputChange(event) {
@@ -35,7 +34,7 @@ class App extends Component {
         let reader = new FileReader();
         let file = event.target.files[0];
 
-        reader.onloadend = () => {
+        reader.onload = () => {
             this.setState({file: file, imagePreviewUrl: reader.result});
         }
 
