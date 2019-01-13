@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {TypographyStyle, GoogleFont} from 'react-typography'
-import typography from './typography'
+// import {TypographyStyle, GoogleFont} from 'react-typography'
+// import typography from './typography'
 
 ReactDOM.render(
     <html>
     <head>
-        <TypographyStyle typography={typography}/>
-        <GoogleFont typography={typography}/>
+        {/* <TypographyStyle typography={typography}/>
+        <GoogleFont typography={typography}/> */}
     </head>
     <body>
         <App/>,

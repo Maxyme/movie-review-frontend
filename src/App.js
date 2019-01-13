@@ -14,7 +14,7 @@ class App extends Component {
             imagePreviewUrl: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleUrlSubmit.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
     }
 
@@ -22,7 +22,7 @@ class App extends Component {
         this.setState({url: event.target.value});
     }
 
-    handleSubmit(event) {
+    handleUrlSubmit(event) {
         event.preventDefault(); // prevent refresh after form send
         axios
             .post(process.env.REACT_APP_API_URL + '/getcounts', {"url": this.state.url})
@@ -55,7 +55,7 @@ class App extends Component {
                 <header className="App-header">
                     <h1>Ent Count</h1>
                 </header>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleUrlSubmit}>
                     <label className="label">
                         <input
                             type="text"
