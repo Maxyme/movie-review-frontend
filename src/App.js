@@ -209,7 +209,6 @@ class App extends Component {
                 <Rectangle
                   sclassName="rect"
                   strokeWidth={2}
-                  fill='none'
                   key={rect.key}
                   {...rect}
                   onTransform={newProps => {
