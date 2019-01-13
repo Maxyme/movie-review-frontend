@@ -1,7 +1,7 @@
-import React from 'react';
-import { Transformer } from 'react-konva';
+import React from "react";
+import { Transformer } from "react-konva";
 
-class RectTransformer extends React.Component {
+class TransformerComponent extends React.Component {
   componentDidMount() {
     this.checkNode();
   }
@@ -14,7 +14,7 @@ class RectTransformer extends React.Component {
     // here we need to manually attach or detach Transformer node
     const stage = this.transformer.getStage();
     const { selectedShapeName } = this.props;
-    const selectedNode = stage.findOne(`.${selectedShapeName}`);
+    const selectedNode = stage.findOne("." + selectedShapeName);
     // do nothing if selected node is already attached
     if (selectedNode === this.transformer.node()) {
       return;
@@ -32,7 +32,7 @@ class RectTransformer extends React.Component {
   render() {
     return (
       <Transformer
-        ref={(node) => {
+        ref={node => {
           this.transformer = node;
         }}
         rotateEnabled={false}
@@ -41,4 +41,4 @@ class RectTransformer extends React.Component {
   }
 }
 
-export default RectTransformer;
+export default TransformerComponent;

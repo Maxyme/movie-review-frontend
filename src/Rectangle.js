@@ -1,77 +1,61 @@
-import React from 'react';
-import { Rect } from 'react-konva';
+import React from "react";
+import { Rect } from "react-konva";
 
 class Rectangle extends React.Component {
-  // compare batchDraw() and draw();
-  componentDidUpdate() {
-    // this.rect.getLayer().draw();
-    this.rect.getLayer().batchDraw();
+  constructor(props) {
+    super(props);
+
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  handleChange = (event) => {
-    const {
-      props: { onTransform },
-    } = this;
+  handleMouseEnter = event => {
     const shape = event.target;
-    // take a look into width and height properties
-    // by default Transformer will change scaleX and scaleY
-    // while transforming
-    // so we need to adjust that properties to width and height
-    onTransform({
-      x: shape.x(),
-      y: shape.y(),
-      width: shape.width() * shape.scaleX(),
-      height: shape.height() * shape.scaleY(),
-      rotation: shape.rotation(),
-    });
+    shape.stroke("#3DF6FF");
+    shape.opacity(0.3);
+    shape.getStage().container().style.cursor = "move";
+    // this.rect.draw();  // if use rect.draw(), the new rectangle will cover its transformer
+    this.rect.getLayer().draw();
   };
 
-  // if use rect.draw(), the new rectangle will cover its transformer
-  handleMouseEnter = (event) => {
+  handleMouseLeave = event => {
     const shape = event.target;
-    shape.stroke('#3DF6FF');
-    shape.getStage().container().style.cursor = 'move';
+    shape.stroke("#00A3AA");
+    shape.opacity(0.4);
+    shape.getStage().container().style.cursor = "crosshair";
     // this.rect.draw();
     this.rect.getLayer().draw();
   };
 
-  handleMouseLeave = (event) => {
+  handleDragMove = event => {
     const shape = event.target;
-    shape.stroke('#00A3AA');
-    shape.getStage().container().style.cursor = 'crosshair';
-    // this.rect.draw();
-    this.rect.getLayer().draw();
+    shape.x = event.target.x;
+    shape.y = event.target.y;
+  };
+
+  handleDragEnd = event => {
+    const shape = event.target;
+    shape.x = event.target.x;
+    shape.y = event.target.y;
   };
 
   render() {
-    const {
-      props: {
-        x, y, width, height, name, stroke,
-      },
-      handleChange,
-      handleMouseEnter,
-      handleMouseLeave,
-    } = this;
     return (
       <Rect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        // force no scaling
-        // otherwise Transformer will change it
-        scaleX={1}
-        scaleY={1}
-        stroke={stroke}
-        strokeWidth={5}
-        name={name}
-        // save state on dragend or transformend
-        onDragEnd={handleChange}
-        onTransformEnd={handleChange}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        x={this.props.x}
+        y={this.props.y}
+        width={this.props.width}
+        height={this.props.height}
+        stroke={this.props.stroke}
+        strokeWidth={this.props.strokeWidth}
+        fill={this.props.fill}
+        name={this.props.name}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onDragMove={this.handleDragMove}
+        onDragEnd={this.handleDragEnd}
         draggable
-        ref={(node) => {
+        ref={node => {
           this.rect = node;
         }}
       />
